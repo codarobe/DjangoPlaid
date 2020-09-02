@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load bulma_tags %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+    <div class="form-header mb-3">
+        <h1 class="title">Log in</h1>
+        {% if form.errors %}
+            <p>
+                Your username and password didn't match.
+                Please try again.
+            </p>
+        {% else %}
+            <p>Please, use the following form to log in:</p>
+        {% endif %}
+    </div>
+    <div class="login-form">
+        <form action="{% url 'login' %}" method="post">
+            {{ form|bulma }}
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}"/>
+            <div class="field">
+                <div class="control">
+                    <input class="button is-primary" type="submit" value="Log in">
+                </div>
+            </div>
+        </form>
+        <p><a href="{% url "password_reset" %}">Forgotten your password?</a></p>
+    </div>
+{% endblock %}

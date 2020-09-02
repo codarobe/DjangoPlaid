@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load bulma_tags %}
+{% block title %}Create an account{% endblock %}
+{% block content %}
+    <div class="form-header mb-3">
+        <h1 class="title">Create an account</h1>
+    </div>
+    <form method="post">
+        {{ user_form|bulma }}
+        {% csrf_token %}
+        <div class="field">
+            <div class="control">
+                <input class="button is-primary" type="submit" value="Create my account">
+            </div>
+        </div>
+    </form>
+{% endblock %}

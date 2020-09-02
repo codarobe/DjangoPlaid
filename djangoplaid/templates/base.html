@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+</head>
+<body>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="{% url "plaid_items:institution_list" %}">DjangoPlaid</a>
+    </div>
+    <div class="navbar-end">
+        {% if request.user.is_authenticated %}
+            <div class="navbar-item">
+                <div class="navbar-text">Hello, {{ request.user.first_name }}</div>
+            </div>
+            <div class="navbar-item">
+                <a class="button" href="{% url "logout" %}">Log out</a>
+            </div>
+        {% else %}
+            <div class="buttons">
+                <a class="button is-primary" href="{% url "register" %}">
+                    <strong>Sign up</strong>
+                </a>
+                <a class="button is-light" href="{% url "login" %}">
+                    Log in
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</nav>
+<div class="container pt-3">
+    <div id="content">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">
+                        {{ message|safe }}
+                        <a href="#" class="close">x</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+</body>
+</html>
