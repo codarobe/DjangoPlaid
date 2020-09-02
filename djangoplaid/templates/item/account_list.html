@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Plaid Accounts{% endblock %}
+{% block content %}
+    <h2 class="title">Plaid Accounts </h2>
+    {% for account in accounts %}
+        <div class="card mb-3 pt-2 pb-2">
+            <div class="container">
+                <h5 class="card-title">{{ account.name }} {{ account.mask }}</h5>
+                {% if account.official_name %}
+                    <h6 class="card-subtitle mb-2 text-muted">{{ account.official_name }}</h6>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

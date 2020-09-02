@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load bulma_tags %}
+{% block title %}Transaction Stats{% endblock %}
+{% block content %}
+    <h2 class="title">Transaction Stats</h2>
+    {% if not current_balance %}
+        <p>Choose an account and a date range to get started.</p>
+        <form method="post" class="mt-3">
+            {{ form|bulma }}
+            {% csrf_token %}
+            <div class="field">
+                <div class="control">
+                    <input class="button is-primary" type="submit" value="Calculate">
+                </div>
+            </div>
+        </form>
+    {% else %}
+        <div>{{ start_date }} to {{ end_date }}</div>
+        <div>Current balance: ${{ current_balance }}</div>
+        <div>Available balance: ${{ available_balance }}</div>
+        <div>Average balance: ${{ average_balance }}</div>
+        <div>Total transactions: {{ total_transactions }}</div>
+        <ul>
+            {% for transaction in transactions %}
+                <li class="box">
+                    <div>
+                        {{ transaction.name }} ({{ transaction.date }})
+                    </div>
+                    <div>
+                        Amount: ${{ transaction.amount }}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

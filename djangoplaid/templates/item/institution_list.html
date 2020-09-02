@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Connected Institutions{% endblock %}
+{% block content %}
+    <div class="columns">
+        <div class="column">
+            <h2 class="title">Connected Institutions</h2>
+        </div>
+        <div class="column has-text-right">
+            <a class="button is-primary" href="{% url "plaid_items:link_form" %}">Add</a>
+        </div>
+    </div>
+    {% for item in items %}
+        <div class="card mb-3 pt-2 pb-2">
+            <div class="container">
+                <div class="columns">
+                    <div class="column">
+                        <a href="{{ item.get_absolute_url }}"><h5 class="card-title">{{ item.institution_name }}</h5>
+                        </a>
+                    </div>
+                    <div class="column has-text-right">
+                        <a class="button is-danger is-outlined" href="#">Disconnect</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
