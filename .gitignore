@@ -1,4 +1,3 @@
 venv/
 *.pyc
 *.pyo
-/djangoplaid/djangoplaid/settings.development.py

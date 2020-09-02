@@ -56,7 +56,7 @@ ROOT_URLCONF = 'djangoplaid.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,7 +130,7 @@ LOGIN_REDIRECT_URL = '/plaid/items/'
 # Plaid Settings
 # Fill in your Plaid API keys - https://dashboard.plaid.com/account/keys
 PLAID_CLIENT_ID = os.getenv('PLAID_CLIENT_ID')
-PLAID_CLIENT_SECRET = os.getenv('PLAID_SECRET')
+PLAID_CLIENT_SECRET = os.getenv('PLAID_CLIENT_SECRET')
 
 # Use 'sandbox' to test with Plaid's Sandbox environment (username: user_good,
 # password: pass_good)
