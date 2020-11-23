@@ -70,17 +70,6 @@ def account_list(request, item_id: int = None):
 
 
 @login_required
-def account_detail(request, account_pk: int):
-    account = get_object_or_404(PlaidAccount,
-                                id=account_pk,
-                                link__user_id=request.user.id)
-    plaid_client.Transactions.get(account_ids=[account.account_id])
-    return render(request, 'item/account_detail.html', {
-        'account': account,
-    })
-
-
-@login_required
 def account_statistic_form(request):
     accounts = PlaidAccount.objects.filter(item__user_id=request.user.id).values_list('id', 'name')
     form = TransactionRangeForm(account_choices=accounts)
@@ -147,7 +136,7 @@ def get_average_balance(current_balance, transactions):
     transactions.sort(key=lambda x: x['date'], reverse=True)
     balances = [current_balance]
     for transaction in transactions:
-        balance += transaction['amount']
+        balance -= transaction['amount']
         balances.append(balance)
     return sum(balances) / len(balances)
 
