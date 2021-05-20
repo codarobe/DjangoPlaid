@@ -125,7 +125,7 @@ STATIC_URL = '/static/'
 # Authentication Options
 
 LOGIN_URL = '/account/login/'
-LOGIN_REDIRECT_URL = '/plaid/items/'
+LOGIN_REDIRECT_URL = '/'
 
 # Plaid Settings
 # Fill in your Plaid API keys - https://dashboard.plaid.com/account/keys
